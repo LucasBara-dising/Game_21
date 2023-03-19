@@ -10,18 +10,18 @@ import com.example.game_21.Model.ItemCard
 class DBHelper (context: Context):SQLiteOpenHelper(context, DB_NAME, null, DB_VERSION) {
 
     companion object {
-        private val DB_VERSION = 1
-        private val DB_NAME = "StoreCards"
-        private val TABLE_NAME = "TB_Cards"
-        private val ID = "Id"
-        private val PLAYER = "Player"
-        private val VALUE_CARD = "VAlue_Card"
-        private val IMG_CARD = "Img_Card"
+        private const val DB_VERSION = 1
+        private const val DB_NAME = "StoreCards"
+        private const val TABLE_NAME = "TB_Cards"
+        private const val ID = "Id"
+        private const val PLAYER = "Player"
+        private const val VALUE_CARD = "Value_Card"
+        private const val IMG_CARD = "Img_Card"
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
        val CREATE_TABLE=
-           "CREATE TABLE $TABLE_NAME ($ID INTEGER  PRIMARY  KEY AUTOINCREMENT, $PLAYER TEXT, $VALUE_CARD INTEGER , $IMG_CARD TEXT);"
+           "CREATE TABLE $TABLE_NAME ($ID INTEGER  PRIMARY  KEY AUTOINCREMENT, $PLAYER TEXT, $VALUE_CARD TEXT , $IMG_CARD TEXT);"
         db?.execSQL(CREATE_TABLE)
     }
 
@@ -31,7 +31,7 @@ class DBHelper (context: Context):SQLiteOpenHelper(context, DB_NAME, null, DB_VE
         onCreate(db)
     }
 
-    fun AddCard(Player:String, valueCard:Int, ImgCard:String ){
+    fun addCard(Player:String, valueCard:String, ImgCard:String ){
         val db=this.writableDatabase
         val values= ContentValues()
 
@@ -44,18 +44,21 @@ class DBHelper (context: Context):SQLiteOpenHelper(context, DB_NAME, null, DB_VE
     }
 
 
-    fun GetCardPlayer(Player:String): ArrayList<ItemCard>{
+    @SuppressLint("Range")
+    //TO DO: Resolver SuppressLint
+    fun getCardPlayer(_player:String): ArrayList<ItemCard>{
         val itemCardList= ArrayList<ItemCard>()
         val db= this.readableDatabase
-        val selectQuery="SELECT * FROM $TABLE_NAME WHERE $PLAYER= $Player"
-        val cursor=db.rawQuery(selectQuery,null)
+        val selectQuery= "SELECT $PLAYER, $VALUE_CARD, $IMG_CARD FROM $TABLE_NAME WHERE $PLAYER =? "
+        val cursor=db.rawQuery(selectQuery, arrayOf(_player))
         if (cursor !=null){
             if(cursor.moveToFirst()){
                 do{
                     val itemCard= ItemCard()
-                    itemCard.Player= cursor.getInt(cursor.getColumnIndex((PLAYER))).toString()
-                    itemCard.CardsValue=cursor.getInt(cursor.getColumnIndex((VALUE_CARD)))
-                    itemCard.CardsImg= cursor.getInt(cursor.getColumnIndex((IMG_CARD))).toString()
+                    itemCard.Player= cursor.getString(cursor.getColumnIndex((PLAYER)))
+                    itemCard.CardsValue= cursor.getString(cursor.getColumnIndex((VALUE_CARD)))
+                    itemCard.CardsImg= cursor.getString(cursor.getColumnIndex((IMG_CARD)))
+                    itemCardList.add(itemCard)
                 }while (cursor.moveToNext())
             }
         }

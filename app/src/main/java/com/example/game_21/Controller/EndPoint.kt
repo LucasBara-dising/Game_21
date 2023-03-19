@@ -15,5 +15,5 @@ interface EndPoint {
 
     //Recebe cartas
     @GET("?")
-    fun GetCards(@Query("?count") numOfCards:Int): Call<Cards>
+    fun GetCards(@Query("count") numOfCards:Int): Call<Cards>
 }
