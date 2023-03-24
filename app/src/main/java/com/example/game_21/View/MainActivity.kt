@@ -1,8 +1,12 @@
 package com.example.game_21.View
 
+import android.R.attr.*
+import android.graphics.Matrix
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.example.game_21.Controller.EndPoint
 import com.example.game_21.Controller.NetworkUtils
 import com.example.game_21.Model.Cards
@@ -29,9 +33,36 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
+        //Rotaion cards
+        //player 1
+        imgViewCard1_P1.rotation= -80F
+        imgViewCard2_P1.rotation= 80F
+
+        //Player 2
+        Glide.with(this).load("https://deckofcardsapi.com/static/img/0C.png").into(imgViewCard1_P2);
+        imgViewCard1_P2.rotation= -10F
+
+        Glide.with(this).load("https://deckofcardsapi.com/static/img/0C.png").into(imgViewCard2_P2);
+        imgViewCard2_P2.rotation= 10F
+
+        //player 3
+        imgViewCard1_P3.rotation= -100F
+        imgViewCard2_P3.rotation= 100F
+
+        //pega mais uma carta
         btnMoreCard.setOnClickListener{
             moreOneCard()
         }
+
+        //reset
+        BtnReset.setOnClickListener {
+            deleteGame()
+            creteDeck()
+        }
+
+        //inicia o jogo
+        deleteGame()
         creteDeck()
     }
 
@@ -74,7 +105,7 @@ class MainActivity : AppCompatActivity() {
             }
         else{
                 Log.d("turn: ", "stop")
-                listCards("p2")
+                showCards()
             }
 
         return  player
@@ -131,17 +162,25 @@ class MainActivity : AppCompatActivity() {
 
                     //add no sqlite
                     databaseHelper.addCard("p2", it.CardsValue, it.CardsImg)
-
-                    Log.d("Cards Value",it.CardsValue)
-                    Log.d("Cards Img",it.CardsImg)
                 }
             }
         })
     }
 
-    private fun listCards(player2:String){
+    private fun listCards(player2:String): ArrayList<ItemCard>{
         cardList=databaseHelper.getCardPlayer(player2)
+        return cardList
+    }
+
+    private fun showCards(){
+        listCards("p2")
         Log.d("Cards Player", cardList.toString())
+
+
+    }
+
+    private fun deleteGame(){
+        databaseHelper.deleteAllCards()
     }
 
 

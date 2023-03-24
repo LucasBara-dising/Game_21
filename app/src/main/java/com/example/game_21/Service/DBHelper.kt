@@ -49,12 +49,13 @@ class DBHelper (context: Context):SQLiteOpenHelper(context, DB_NAME, null, DB_VE
     fun getCardPlayer(_player:String): ArrayList<ItemCard>{
         val itemCardList= ArrayList<ItemCard>()
         val db= this.readableDatabase
-        val selectQuery= "SELECT $PLAYER, $VALUE_CARD, $IMG_CARD FROM $TABLE_NAME WHERE $PLAYER =? "
+        val selectQuery= "SELECT * FROM $TABLE_NAME WHERE $PLAYER =? "
         val cursor=db.rawQuery(selectQuery, arrayOf(_player))
         if (cursor !=null){
             if(cursor.moveToFirst()){
                 do{
                     val itemCard= ItemCard()
+                    itemCard.IdCard= cursor.getInt(cursor.getColumnIndex((ID)))
                     itemCard.Player= cursor.getString(cursor.getColumnIndex((PLAYER)))
                     itemCard.CardsValue= cursor.getString(cursor.getColumnIndex((VALUE_CARD)))
                     itemCard.CardsImg= cursor.getString(cursor.getColumnIndex((IMG_CARD)))

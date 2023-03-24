@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bgGreen"
+    android:padding="22dp"
     tools:context=".View.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/BtnReset"
@@ -23,12 +17,109 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnMoreCard"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Mais uma carta"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/shape_circle"
+        android:backgroundTint="@color/DarkGreen"
+        android:text="More One\n Card"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- ##########################Player 1#############################-->
+
+    <TextView
+        android:id="@+id/textViewPointP1"
+        style="@style/txtViewPoint"
+        android:layout_above="@+id/imgViewCard1_P2"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="60dp"
+        android:text="14" />
+
+    <ImageView
+        android:id="@+id/imgViewCard1_P1"
+        android:layout_width="100dp"
+        android:layout_height="160dp"
+        android:layout_above="@+id/textViewPointP1"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="24dp"
+        app:srcCompat="@drawable/card_reverse" />
+
+    <ImageView
+        android:id="@+id/imgViewCard2_P1"
+        android:layout_width="100dp"
+        android:layout_height="160dp"
+        android:layout_above="@+id/textViewPointP1"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="70dp"
+        app:srcCompat="@drawable/card_reverse" />
+
+
+
+    <!-- ##########################Player 2#############################-->
+
+    <ImageView
+        android:id="@+id/imgViewCard1_P2"
+        android:layout_width="100dp"
+        android:layout_height="160dp"
+        android:layout_above="@+id/textViewPointP2"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="170dp"
+        app:srcCompat="@drawable/card_reverse" />
+
+    <ImageView
+        android:id="@+id/imgViewCard2_P2"
+        android:layout_width="100dp"
+        android:layout_height="160dp"
+        android:layout_above="@+id/textViewPointP2"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="100dp"
+        app:srcCompat="@drawable/card_reverse"/>
+
+    <TextView
+        android:id="@+id/textViewPointP2"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        style="@style/txtViewPoint"
+        android:text="14" />
+
+
+    <!-- ##########################Player 3#############################-->
+
+    <TextView
+        android:id="@+id/textViewPointP3"
+        style="@style/txtViewPoint"
+        android:layout_above="@+id/imgViewCard1_P2"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="60dp"
+        android:text="14" />
+
+    <ImageView
+        android:id="@+id/imgViewCard1_P3"
+        android:layout_width="100dp"
+        android:layout_height="160dp"
+        android:layout_above="@+id/textViewPointP1"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="24dp"
+        app:srcCompat="@drawable/card_reverse" />
+
+    <ImageView
+        android:id="@+id/imgViewCard2_P3"
+        android:layout_width="100dp"
+        android:layout_height="160dp"
+        android:layout_above="@+id/textViewPointP1"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="70dp"
+        app:srcCompat="@drawable/card_reverse" />
+
+
+
+</RelativeLayout>

@@ -9,5 +9,7 @@ data class ItemCard(
     @SerializedName("value")
     var CardsValue: String="",
 
-    var Player: String=" "
+    var Player: String=" ",
+
+    var IdCard: Int=0
 )
