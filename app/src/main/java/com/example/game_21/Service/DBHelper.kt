@@ -68,6 +68,8 @@ class DBHelper (context: Context):SQLiteOpenHelper(context, DB_NAME, null, DB_VE
         return itemCardList
     }
 
+
+
     fun deleteAllCards(): Boolean {
         val db = this.writableDatabase
         val _success = db.delete(TABLE_NAME, null,null).toLong()
